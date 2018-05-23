@@ -39,6 +39,8 @@
 
     // Create an initial toDoCount variable
     var toDoCount = 0;
+
+    var toDos = [];
     //  On Click event associated with the add-to-do function
     $("#add-to-do").on("click", function(event) {
       // prevent form from submitting
@@ -46,7 +48,11 @@
 
       // Get the to-do "value" from the textbox and store it a variable
       var todoVal = $('#to-do').val();
-      console.log(item);
+      toDos.push(todoVal);
+      console.log(toDos);
+    
+    localStorage.setItem('toDos', JSON.stringify(toDos));
+    
 
 
       toDoCount++;
@@ -69,6 +75,8 @@
           $('#to-dos').append(item);
 
           $('#to-do').val('');
+
+          console.log($('#to-dos'));
       // Create a button with unique identifiers based on what number it is in the list. Again use jQuery to do this.
       // Give your button a data attribute called data-to-do and a class called "checkbox".
       // Lastly append the letter X inside.
@@ -93,10 +101,12 @@
     $(document.body).on("click", ".checkbox", function() {
 
       // Get the number of the button from its data attribute and hold in a variable called  toDoNumber.
-
-
+    var toDoNumber = $(this).attr('data-to-do');
+    $('#item-' + toDoNumber).empty();
+    var oldTodos = localStorage.getItem('toDos');
+    console.log(oldTodos);
       // Select and Empty the specific <p> element that previously held the to do item number.
-
+    
 
     });
   </script>
